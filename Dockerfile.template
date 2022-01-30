@@ -1,10 +1,11 @@
-FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine-python:3 as src
+FROM balenalib/%%BALENA_MACHINE_NAME%%-alpine-python:3.6 as src
 
 WORKDIR /usr/src/app
 
 RUN apk add --no-cache git gcc g++ musl-dev libffi-dev openssl-dev file make
 RUN pip install flask flask_sqlalchemy flask-login pyjwt gevent protobuf protobuf3_to_dict stravalib garmin-uploader cryptography requests
 
+ENV forcepull 2022-01-30_0 
 RUN git clone --depth 1 https://github.com/zoffline/zwift-offline
 RUN chmod 777 zwift-offline/storage
 
